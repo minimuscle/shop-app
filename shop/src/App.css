@@ -1,0 +1,14 @@
+.salePrice {
+  font-size: smaller;
+}
+
+.salePrice span {
+  text-decoration: line-through;
+  font-size: larger;
+  color: #ccc;
+}
+
+.card a {
+  text-decoration: none;
+  color: unset;
+}

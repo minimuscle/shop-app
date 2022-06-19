@@ -8,6 +8,11 @@
   color: #ccc;
 }
 
+.card {
+  display: inline-block;
+  margin: 10px;
+}
+
 .card a {
   text-decoration: none;
   color: unset;

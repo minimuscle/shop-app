@@ -1,4 +1,3 @@
-const http = require('http')
 const sqlite3 = require('sqlite3').verbose()
 const express = require('express')
 const app = express()
@@ -16,10 +15,21 @@ app.get('/products', (req, res) => {
   db.all(sql, [], (err, rows) => {
     if (err) return console.error(err.message)
 
-    rows.forEach((row) => {
+    /*rows.forEach((row) => {
       console.log(row)
       res.send(row)
-    })
+    })*/
+    console.log(rows)
+    res.send(rows)
+  })
+})
+
+app.get('/product/:id', (req, res) => {
+  console.log(req.params.id)
+  const sql = `SELECT * FROM PRODUCTS WHERE product_id = ${req.params.id}`
+  db.each(sql, [], (err, row) => {
+    if (err) return console.error(err.message)
+    res.send(row)
   })
 })
 

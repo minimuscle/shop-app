@@ -24,16 +24,16 @@ function ShopCard() {
           'Content-Type': 'application/json',
         },
       })
-      setProducts([response.data])
+      setProducts(response.data)
     }
     getProducts()
   }, [])
 
   return (
     <div>
-      {products.map((product) => {
+      {products.map((product, key) => {
         return (
-          <Card sx={{ maxWidth: 400 }} key={product} className='card'>
+          <Card sx={{ maxWidth: 400, height: 500 }} key={key} className='card'>
             <Link to={`/shop/product/${product.product_id}`}>
               <CardHeader
                 title={product.name}

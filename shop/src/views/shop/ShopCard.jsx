@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react'
+import { Link } from 'react-router-dom'
 import {
   Card,
   CardContent,
@@ -33,7 +34,7 @@ function ShopCard() {
       {products.map((product) => {
         return (
           <Card sx={{ maxWidth: 400 }} key={product} className='card'>
-            <a href={`/products/product?=${product.product_id}`}>
+            <Link to={`/shop/product/${product.product_id}`}>
               <CardHeader
                 title={product.name}
                 subheader={
@@ -68,9 +69,9 @@ function ShopCard() {
                     ? 'https://via.placeholder.com/400x300?text=400x300+No+Image'
                     : 'https://via.placeholder.com/400x300?text=Loading+Image'
                 }
-                alt='green iguana'
+                alt='Placeholder'
               />
-            </a>
+            </Link>
             <CardContent>
               <Typography variant='body2'>{product.description}</Typography>
             </CardContent>

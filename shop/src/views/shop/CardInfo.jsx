@@ -3,12 +3,10 @@ import { Container, Grid } from "@mui/material";
 import { useParams } from "react-router-dom";
 import axios from "axios";
 import {
-  Card,
   CardContent,
   Typography,
   Button,
   CardActions,
-  CardHeader,
   CardMedia,
 } from "@mui/material";
 
@@ -35,10 +33,10 @@ function CardInfo() {
       {productInfo.map((product) => {
         return (
           <Grid container key={product} className='productInfo'>
-            <Grid item xs={4}>
+            <Grid item xs={10}>
               <Typography variant='h3'>{product.name}</Typography>
             </Grid>
-            <Grid item xs={8} className='cardInfoPrice'>
+            <Grid item xs={2} className='cardInfoPrice'>
               <Typography variant='h4'>
                 {product.sale_price == null ? (
                   <div>${product.price}</div>
@@ -50,32 +48,18 @@ function CardInfo() {
                 )}
               </Typography>
             </Grid>
-            <CardHeader
-              title={product.name}
-              subheader={
-                product.parent == null ? (
+            <Grid item xs={2} className='cardInfoPrice'>
+              <Typography variant='h4'>
+                {product.parent == null ? (
                   <div>{product.category}</div>
                 ) : (
                   <div>
                     {product.parent}&#160;&#8226;&#160;
                     {product.category}
                   </div>
-                )
-              }
-              action={
-                <Typography variant='h4'>
-                  {product.sale_price == null ? (
-                    <div>${product.price}</div>
-                  ) : (
-                    <div className='salePrice'>
-                      ${product.sale_price}&#160;
-                      <span>${product.price}</span>
-                    </div>
-                  )}
-                </Typography>
-              }
-            />
-
+                )}
+              </Typography>
+            </Grid>
             <CardMedia
               component='img'
               sx={{ maxWidth: 1000, maxHeight: 600 }}

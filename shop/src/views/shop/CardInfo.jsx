@@ -48,8 +48,8 @@ function CardInfo() {
                 )}
               </Typography>
             </Grid>
-            <Grid item xs={2} className='cardInfoPrice'>
-              <Typography variant='h4'>
+            <Grid item xs={12} className='cardInfoPrice'>
+              <Typography variant='h5'>
                 {product.parent == null ? (
                   <div>{product.category}</div>
                 ) : (
@@ -60,16 +60,13 @@ function CardInfo() {
                 )}
               </Typography>
             </Grid>
-            <CardMedia
-              component='img'
-              sx={{ maxWidth: 1000, maxHeight: 600 }}
-              image={
-                product.image == null
-                  ? "https://via.placeholder.com/1000x600?text=1000x600+No+Image"
-                  : "https://via.placeholder.com/400x300?text=Loading+Image"
-              }
-              alt='Placeholder'
-            />
+            <Grid item xs={6}>
+              {product.image == null ? (
+                <img src='https://via.placeholder.com/1000x600?text=1000x600+No+Image' />
+              ) : (
+                <img src='https://via.placeholder.com/400x300?text=Loading+Image' />
+              )}
+            </Grid>
             <CardContent>
               <Typography variant='body2'>{product.description}</Typography>
             </CardContent>

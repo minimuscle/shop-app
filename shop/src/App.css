@@ -1,6 +1,12 @@
 .productInfo {
   display: inline;
 }
+
+.productInfo img {
+  width: 100%;
+  max-width: 600px;
+}
+
 .cardInfoPrice {
   position: relative;
   display: flex;

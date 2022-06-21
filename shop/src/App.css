@@ -9,6 +9,7 @@
 }
 
 .card {
+  position: relative;
   display: inline-block;
   margin: 10px;
 }
@@ -16,4 +17,42 @@
 .card a {
   text-decoration: none;
   color: unset;
+}
+
+.card .desc {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 3; /* number of lines to show in the exerpt */
+          line-clamp: 3; 
+  -webkit-box-orient: vertical;
+}
+
+.card .buttons {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+}
+
+.header {
+  padding-top: 20px;
+  padding-bottom: 75px;
+}
+
+.header h1 {
+  display: inline;
+  float: left;
+}
+
+.header ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+
+.header ul li {
+  padding-top: 20px;
+  float: right;
+  display: inline;
+  margin-left: 20px;
 }

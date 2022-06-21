@@ -5,7 +5,7 @@ import ShopCard from './ShopCard'
 function Shop() {
   return (
     <Container>
-      <h1>Shadowvale Shop</h1>
+      <h2>All Shops</h2>
       <ShopCard />
     </Container>
   )

@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from 'react'
-import { Link } from 'react-router-dom'
+import React, { useEffect, useState } from "react"
+import { Link } from "react-router-dom"
 import {
   Card,
   CardContent,
@@ -8,32 +8,34 @@ import {
   CardActions,
   CardHeader,
   CardMedia,
-} from '@mui/material'
-import axios from 'axios'
-import '../../App.css'
+} from "@mui/material"
+import SendIcon from '@mui/icons-material/Send'
+import ShoppingCartIcon from '@mui/icons-material/ShoppingCart'
+import axios from "axios"
+import "../../App.css"
 
 function ShopCard() {
-  const [products, setProducts] = useState(['Database Loading'])
+  const [products, setProducts] = useState(["Database Loading"]);
 
   useEffect(() => {
     async function getProducts() {
       const response = await axios({
-        method: 'GET',
-        url: 'http://localhost:8080/products',
+        method: "GET",
+        url: "http://localhost:8080/products",
         headers: {
-          'Content-Type': 'application/json',
+          "Content-Type": "application/json",
         },
-      })
-      setProducts(response.data)
+      });
+      setProducts(response.data);
     }
-    getProducts()
-  }, [])
+    getProducts();
+  }, []);
 
   return (
     <div>
       {products.map((product, key) => {
         return (
-          <Card sx={{ maxWidth: 400, height: 500 }} key={key} className='card'>
+          <Card sx={{ maxWidth: 400, height: 550 }} key={key} className='card'>
             <Link to={`/shop/product/${product.product_id}`}>
               <CardHeader
                 title={product.name}
@@ -66,24 +68,26 @@ function ShopCard() {
                 sx={{ maxWidth: 400, maxHeight: 300 }}
                 image={
                   product.image == null
-                    ? 'https://via.placeholder.com/400x300?text=400x300+No+Image'
-                    : 'https://via.placeholder.com/400x300?text=Loading+Image'
+                    ? "https://via.placeholder.com/400x300?text=400x300+No+Image"
+                    : "https://via.placeholder.com/400x300?text=Loading+Image"
                 }
                 alt='Placeholder'
               />
             </Link>
             <CardContent>
-              <Typography variant='body2'>{product.description}</Typography>
+              <Typography variant='body2' className="desc">{product.description}</Typography>
             </CardContent>
-            <CardActions>
-              <Button size='small'>Share</Button>
-              <Button size='small'>Learn More</Button>
+            <CardActions className="buttons">
+              <Button size='small' endIcon={<ShoppingCartIcon />}>Add to Cart</Button>
+              <Button variant='contained' endIcon={<SendIcon />}>
+                Buy Now
+              </Button>
             </CardActions>
           </Card>
-        )
+        );
       })}
     </div>
-  )
+  );
 }
 
-export default ShopCard
+export default ShopCard;

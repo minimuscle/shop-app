@@ -6,10 +6,12 @@ import { Routes, Route } from 'react-router-dom'
 import CardInfo from './views/shop/CardInfo'
 import NoMatch from './views/NoMatch'
 import Product from './views/shop/Product'
+import Layout from './views/Layout'
 
 function App() {
   return (
     <Routes>
+      <Route element={<Layout/>}>
       <Route index element={<Shop />} />
       <Route path="about" element={<About />} />
       <Route path="*" element={<NoMatch />} />
@@ -22,6 +24,9 @@ function App() {
 
       {/* // TODO: Hide these behind a login wall */}
       <Route path='create' element={<CreateShopItem />} />
+
+      </Route>
+
 
 
     </Routes>

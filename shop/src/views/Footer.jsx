@@ -2,11 +2,11 @@ import React from "react";
 import { Container } from "@mui/material";
 import { Link } from "react-router-dom";
 
-function Header() {
+function Footer() {
   return (
-    <div className='header'>
+    <div className='footer'>
       <Container>
-        <h1>Shadowvale Crafts</h1>
+        <h1>Shadowvale Crafts Footer</h1>
         <ul>
           <li>
             <Link to='/shop'>My Cart</Link>
@@ -20,4 +20,4 @@ function Header() {
   );
 }
 
-export default Header;
+export default Footer;

@@ -29,7 +29,7 @@ function CardInfo() {
   }, [productId]);
 
   return (
-    <Container>
+    <Container className='content'>
       {productInfo.map((product) => {
         return (
           <Grid container key={product} className='productInfo'>

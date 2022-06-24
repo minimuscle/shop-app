@@ -16,8 +16,11 @@ import "../../App.css";
 
 function ShopCard() {
   const [products, setProducts] = useState(["Database Loading"]);
+  const [title, setTitle] = useState("h5");
+  const [price, setPrice] = useState("h4");
+
   // TODO: This will eventually be set by the user
-  const cardNum = 3;
+  const cardNum = 5;
 
   useEffect(() => {
     async function getProducts() {
@@ -30,9 +33,32 @@ function ShopCard() {
       });
       setProducts(response.data);
     }
-    getProducts();
+    async function getCardNum() {
+      //This sets the size of the images and the text based on the number of cards, this will have a max size and min size.
+      switch (cardNum) {
+        case 3:
+          setTitle("h5");
+          setPrice("h4");
+          break;
 
-    //This sets the side of the images and the text based on the number of cards, this will have a max side and min size.
+        case 4:
+          setTitle("h5");
+          setPrice("h5");
+          break;
+
+        case 5:
+          setTitle("h6");
+          setPrice("h6");
+          break;
+
+        default:
+          setTitle("h5");
+          setPrice("h4");
+      }
+    }
+
+    getProducts();
+    getCardNum();
   }, []);
 
   return (
@@ -40,7 +66,7 @@ function ShopCard() {
       {products.map((product, key) => {
         return (
           <Card
-            sx={{ maxWidth: 1090 / cardNum, height: 550 }}
+            sx={{ maxWidth: 1090 / cardNum - 10, height: 1650 / cardNum }}
             key={key}
             className='card'
           >
@@ -49,14 +75,9 @@ function ShopCard() {
                 sx={{
                   display: "flex",
                   overflow: "hidden",
-                  lineClamp: "3",
-                  "& .MuiCardHeader-content": {
-                    overflow: "hidden",
-                  },
                   height: "75px",
-                  verticalAlign: "text-top",
                 }}
-                title={<Typography variant='h5'>{product.name}</Typography>}
+                title={<Typography variant={title}>{product.name}</Typography>}
                 subheader={
                   product.parent == null ? (
                     <div>{product.category}</div>
@@ -68,7 +89,7 @@ function ShopCard() {
                   )
                 }
                 action={
-                  <Typography variant='h4'>
+                  <Typography variant={price}>
                     {product.sale_price == null ? (
                       <div>${product.price}</div>
                     ) : (

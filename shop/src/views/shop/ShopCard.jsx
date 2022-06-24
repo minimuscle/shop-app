@@ -20,7 +20,7 @@ function ShopCard() {
   const [price, setPrice] = useState("h4");
 
   // TODO: This will eventually be set by the user
-  const cardNum = 5;
+  const cardNum = 3;
 
   useEffect(() => {
     async function getProducts() {

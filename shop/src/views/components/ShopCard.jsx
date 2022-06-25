@@ -22,6 +22,8 @@ function ShopCard() {
   // TODO: This will eventually be set by the user
   const cardNum = 3
 
+  //FIXME: This should not strictly be here
+
   useEffect(() => {
     async function getProducts() {
       const response = await axios({

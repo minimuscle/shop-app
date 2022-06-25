@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import React, { useEffect, useState } from 'react'
+import { Link } from 'react-router-dom'
 import {
   Card,
   CardContent,
@@ -8,58 +8,58 @@ import {
   CardActions,
   CardHeader,
   CardMedia,
-} from "@mui/material";
-import SendIcon from "@mui/icons-material/Send";
-import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
-import axios from "axios";
-import "../../App.css";
+} from '@mui/material'
+import SendIcon from '@mui/icons-material/Send'
+import ShoppingCartIcon from '@mui/icons-material/ShoppingCart'
+import axios from 'axios'
+import '../../App.css'
 
 function ShopCard() {
-  const [products, setProducts] = useState(["Database Loading"]);
-  const [title, setTitle] = useState("h5");
-  const [price, setPrice] = useState("h4");
+  const [products, setProducts] = useState(['Database Loading'])
+  const [title, setTitle] = useState('h5')
+  const [price, setPrice] = useState('h4')
 
   // TODO: This will eventually be set by the user
-  const cardNum = 3;
+  const cardNum = 3
 
   useEffect(() => {
     async function getProducts() {
       const response = await axios({
-        method: "GET",
-        url: "http://localhost:8080/products",
+        method: 'GET',
+        url: 'http://localhost:8080/products',
         headers: {
-          "Content-Type": "application/json",
+          'Content-Type': 'application/json',
         },
-      });
-      setProducts(response.data);
+      })
+      setProducts(response.data)
     }
     async function getCardNum() {
       //This sets the size of the images and the text based on the number of cards, this will have a max size and min size.
       switch (cardNum) {
         case 3:
-          setTitle("h5");
-          setPrice("h4");
-          break;
+          setTitle('h5')
+          setPrice('h4')
+          break
 
         case 4:
-          setTitle("h5");
-          setPrice("h5");
-          break;
+          setTitle('h5')
+          setPrice('h5')
+          break
 
         case 5:
-          setTitle("h6");
-          setPrice("h6");
-          break;
+          setTitle('h6')
+          setPrice('h6')
+          break
 
         default:
-          setTitle("h5");
-          setPrice("h4");
+          setTitle('h5')
+          setPrice('h4')
       }
     }
 
-    getProducts();
-    getCardNum();
-  }, []);
+    getProducts()
+    getCardNum()
+  }, [])
 
   return (
     <div>
@@ -73,9 +73,9 @@ function ShopCard() {
             <Link to={`/shop/product/${product.product_id}`}>
               <CardHeader
                 sx={{
-                  display: "flex",
-                  overflow: "hidden",
-                  height: "75px",
+                  display: 'flex',
+                  overflow: 'hidden',
+                  height: '75px',
                 }}
                 title={<Typography variant={title}>{product.name}</Typography>}
                 subheader={
@@ -107,8 +107,8 @@ function ShopCard() {
                 sx={{ maxWidth: 400, maxHeight: 300 }}
                 image={
                   product.image == null
-                    ? "https://via.placeholder.com/400x300?text=400x300+No+Image"
-                    : "https://via.placeholder.com/400x300?text=Loading+Image"
+                    ? 'https://via.placeholder.com/400x300?text=400x300+No+Image'
+                    : 'https://via.placeholder.com/400x300?text=Loading+Image'
                 }
                 alt='Placeholder'
               />
@@ -127,10 +127,10 @@ function ShopCard() {
               </Button>
             </CardActions>
           </Card>
-        );
+        )
       })}
     </div>
-  );
+  )
 }
 
-export default ShopCard;
+export default ShopCard

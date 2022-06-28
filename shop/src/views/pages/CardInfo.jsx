@@ -1,14 +1,7 @@
 import React, { useEffect, useState } from "react";
-import { Container, Grid } from "@mui/material";
+import { Container, Grid, Typography, Button } from "@mui/material";
 import { useParams } from "react-router-dom";
 import axios from "axios";
-import {
-  CardContent,
-  Typography,
-  Button,
-  CardActions,
-  CardMedia,
-} from "@mui/material";
 
 function CardInfo() {
   const { productId } = useParams();
@@ -67,13 +60,13 @@ function CardInfo() {
                 <img src='https://via.placeholder.com/400x300?text=Loading+Image' />
               )}
             </Grid>
-            <CardContent>
+            <Grid>
               <Typography variant='body2'>{product.description}</Typography>
-            </CardContent>
-            <CardActions>
+            </Grid>
+            <Grid>
               <Button size='small'>Share</Button>
               <Button size='small'>Learn More</Button>
-            </CardActions>
+            </Grid>
           </Grid>
         );
       })}

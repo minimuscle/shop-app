@@ -1,7 +1,14 @@
 import React, { useEffect, useState } from "react";
-import { Container, Grid, Typography, Button } from "@mui/material";
+import {
+  Container,
+  Grid,
+  Typography,
+  Button,
+  Breadcrumbs,
+} from "@mui/material";
 import { useParams } from "react-router-dom";
 import axios from "axios";
+import { Link } from "react-router-dom";
 import SendIcon from "@mui/icons-material/Send";
 import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 
@@ -19,6 +26,7 @@ function CardInfo() {
         },
       });
       setProductInfo([response.data]);
+      document.title = response.data.name + " | Shadowvale Crafts";
     }
     getProducts();
   }, [productId]);
@@ -28,6 +36,11 @@ function CardInfo() {
       {productInfo.map((product) => {
         return (
           <Grid container key={product} className='productInfo'>
+            <title>TEST</title>
+              <Breadcrumbs aria-label='breadcrumb'>
+                <Typography color='text.primary'>Breadcrumbs</Typography>
+              </Breadcrumbs>
+            </Grid>
             <Grid item xs={10}>
               <Typography variant='h3'>{product.name}</Typography>
             </Grid>

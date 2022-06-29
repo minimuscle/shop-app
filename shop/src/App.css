@@ -83,8 +83,26 @@
 .footer {
   padding: 50px 0;
   background-color: #ccc;
+  display: flex;
+  height: 100%;
 }
 
 .content {
   padding-bottom: 100px;
+  min-height: calc(100vh - 95px - 233px); /* 100% of view height minus the header and the footer */
+}
+
+.cardDesc {
+  padding-left: 20px;
+  position: relative;
+}
+
+.cardDesc .buttons {
+  display: block;
+  position: absolute;
+  bottom: 0;
+}
+
+.cardDesc .buttons button {
+  margin: 20px 10px;
 }

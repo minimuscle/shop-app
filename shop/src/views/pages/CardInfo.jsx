@@ -2,6 +2,8 @@ import React, { useEffect, useState } from "react";
 import { Container, Grid, Typography, Button } from "@mui/material";
 import { useParams } from "react-router-dom";
 import axios from "axios";
+import SendIcon from "@mui/icons-material/Send";
+import ShoppingCartIcon from "@mui/icons-material/ShoppingCart";
 
 function CardInfo() {
   const { productId } = useParams();
@@ -60,12 +62,17 @@ function CardInfo() {
                 <img src='https://via.placeholder.com/400x300?text=Loading+Image' />
               )}
             </Grid>
-            <Grid>
-              <Typography variant='body2'>{product.description}</Typography>
-            </Grid>
-            <Grid>
-              <Button size='small'>Share</Button>
-              <Button size='small'>Learn More</Button>
+            <Grid item xs={6} className='cardDesc'>
+              <Typography variant='h6'>Description:</Typography>
+              <Typography variant='body1'>{product.description}</Typography>
+              <div className='buttons'>
+                <Button variant='contained' endIcon={<ShoppingCartIcon />}>
+                  Add to Cart
+                </Button>
+                <Button variant='contained' endIcon={<SendIcon />}>
+                  Buy Now
+                </Button>
+              </div>
             </Grid>
           </Grid>
         );

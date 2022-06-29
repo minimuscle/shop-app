@@ -6,7 +6,9 @@ function Header() {
   return (
     <div className='header'>
       <Container>
-        <h1>Shadowvale Crafts</h1>
+        <Link to='/shop'>
+          <h1>Shadowvale Crafts</h1>
+        </Link>
         <ul>
           <li>
             <Link to='/shop'>My Cart</Link>

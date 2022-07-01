@@ -36,9 +36,12 @@ function CardInfo() {
       {productInfo.map((product) => {
         return (
           <Grid container key={product} className='productInfo'>
-            <Breadcrumbs aria-label='breadcrumb'>
-              <Typography color='text.primary'>Breadcrumbs</Typography>
-            </Breadcrumbs>
+            <Grid item xs={12}>
+              <Breadcrumbs aria-label='breadcrumb'>
+                <Typography color='text.primary'>Breadcrumbs</Typography>
+              </Breadcrumbs>
+            </Grid>
+
             <Grid item xs={10}>
               <Typography variant='h3'>{product.name}</Typography>
             </Grid>

@@ -20,6 +20,9 @@ function Header() {
           <li>
             <Link to="/shop">Shop</Link>
           </li>
+          <li>
+            <Link to="/new">Add Product</Link>
+          </li>
         </ul>
       </Container>
     </div>

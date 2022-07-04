@@ -22,7 +22,7 @@ function ShopCard() {
   // TODO: This will eventually be set by the user
   const cardNum = 3
 
-  //FIXME: This should not strictly be here
+  // FIXME: Images need to be cropped to be 4:3. use cropper.js to do this.
 
   useEffect(() => {
     async function getProducts() {
@@ -111,7 +111,7 @@ function ShopCard() {
                 image={
                   product.image == null
                     ? 'https://via.placeholder.com/400x300?text=400x300+No+Image'
-                    : 'https://via.placeholder.com/400x300?text=Loading+Image'
+                    : `data:image/jpeg;base64,${product.image}`
                 }
                 alt="Placeholder"
               />

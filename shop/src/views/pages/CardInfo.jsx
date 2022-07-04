@@ -31,7 +31,11 @@ function CardInfo() {
           <Grid container key={product} className="productInfo">
             <Grid item xs={12}>
               <Breadcrumbs aria-label="breadcrumb">
-                <Typography color="text.primary">Breadcrumbs</Typography>
+                <Typography color="text.primary">
+                  {product.category} /{' '}
+                  {product.parent != null ? product.parent : null}{' '}
+                  {product.name}{' '}
+                </Typography>
               </Breadcrumbs>
             </Grid>
 
@@ -66,7 +70,7 @@ function CardInfo() {
               {product.image == null ? (
                 <img src="https://via.placeholder.com/1000x600?text=1000x600+No+Image" />
               ) : (
-                <img src="https://via.placeholder.com/400x300?text=Loading+Image" />
+                <img src={`data:image/jpeg;base64,${product.image}`} />
               )}
             </Grid>
             <Grid item xs={6} className="cardDesc">

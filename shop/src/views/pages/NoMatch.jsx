@@ -1,11 +1,11 @@
-import React from "react";
+import React from 'react'
 
 function NoMatch() {
   return (
-    <div className='content'>
+    <div className="content">
       <h1>Sorry, No Page Found</h1>
     </div>
-  );
+  )
 }
 
-export default NoMatch;
+export default NoMatch

@@ -32,7 +32,7 @@ function App() {
       </Route>
     </Routes>
 
-  );
+  )
 }
 
-export default App;
+export default App

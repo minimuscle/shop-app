@@ -12,13 +12,15 @@ parserOptions:
 plugins:
   - react
 rules:
-  indent: ['error', 2, { 'SwitchCase': 1 }]
+  indent: ['warn', 2, { 'SwitchCase': 1 }]
   linebreak-style:
-    - error
+    - warn
     - unix
   quotes:
-    - error
+    - warn
     - single
   semi:
     - warn
     - never
+  no-unused-vars:
+    - warn

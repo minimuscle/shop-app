@@ -1,3 +1,4 @@
+import React from 'react'
 import './App.css'
 import Shop from './views/pages/Shop'
 import About from './views/pages/About'
@@ -7,32 +8,29 @@ import CardInfo from './views/pages/CardInfo'
 import NoMatch from './views/pages/NoMatch'
 import Product from './views/components/Product'
 import Layout from './views/components/Layout'
-import { ShoppingCartContext } from './views/context/ShoppingCartContext'
+import Cart from './views/pages/Cart'
 
 function App() {
   return (
-    <ShoppingCartContext.Provider>
-      <Routes>
-        <Route element={<Layout />}>
-          <Route index element={<Shop />} />
-          <Route path="about" element={<About />} />
-          <Route path="*" element={<NoMatch />} />
+    <Routes>
+      <Route element={<Layout />}>
+        <Route index element={<Shop />} />
+        <Route path="about" element={<About />} />
+        <Route path="*" element={<NoMatch />} />
 
-          {/** Routes for the product */}
-          <Route path="shop" element={<Shop />} />
-          <Route path="shop/product" element={<Product />}>
-            <Route path=":productId" element={<CardInfo />} />
-          </Route>
-
-          {/* // TODO: Hide these behind a login wall */}
-          <Route path='create' element={<CreateShopItem />} />
-
+        {/** Routes for the product */}
+        <Route path="shop" element={<Shop />} />
+        <Route path="shop/product" element={<Product />}>
+          <Route path=":productId" element={<CardInfo />} />
         </Route>
 
+        <Route path="/cart" element={<Cart />} />
 
+        {/* // TODO: Hide these behind a login wall */}
+        <Route path='create' element={<CreateShopItem />} />
 
-      </Routes>
-    </ShoppingCartContext.Provider>
+      </Route>
+    </Routes>
 
   );
 }

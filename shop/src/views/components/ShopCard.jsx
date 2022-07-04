@@ -1,4 +1,5 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState, useContext } from 'react'
+import { C } from '../context/CartContext'
 import { Link } from 'react-router-dom'
 import {
   Card,
@@ -14,11 +15,11 @@ import ShoppingCartIcon from '@mui/icons-material/ShoppingCart'
 import axios from 'axios'
 import '../../App.css'
 
-function ShopCard() {
+function ShopCard(p) {
   const [products, setProducts] = useState(['Database Loading'])
   const [title, setTitle] = useState('h5')
   const [price, setPrice] = useState('h4')
-
+  const { cart, setCart } = useContext(C)
   // TODO: This will eventually be set by the user
   const cardNum = 3
 
@@ -64,9 +65,18 @@ function ShopCard() {
     getCardNum()
   }, [])
 
+  function addToCart() {
+    setCart([...cart, p])
+  }
+
+  function removeFromCart() {
+    setCart(cart.filter((c) => c.id !== p.id))
+  }
+
   return (
     <div>
       {products.map((product, key) => {
+        // TODO: Move all of this from CARD to ShopCard Component
         return (
           <Card
             sx={{ maxWidth: 1090 / cardNum - 10, height: 1650 / cardNum }}
@@ -122,10 +132,18 @@ function ShopCard() {
               </Typography>
             </CardContent>
             <CardActions className="buttons">
-              <Button size="small" endIcon={<ShoppingCartIcon />}>
+              <Button
+                size="small"
+                endIcon={<ShoppingCartIcon />}
+                onClick={addToCart}
+              >
                 Add to Cart
               </Button>
-              <Button variant="contained" endIcon={<SendIcon />}>
+              <Button
+                variant="contained"
+                endIcon={<SendIcon />}
+                onClick={removeFromCart}
+              >
                 Buy Now
               </Button>
             </CardActions>

@@ -2,13 +2,13 @@ import React from 'react'
 import './App.css'
 import Shop from './views/pages/Shop'
 import About from './views/pages/About'
-import CreateShopItem from './views/admin/create/CreateShopItem'
 import { Routes, Route } from 'react-router-dom'
 import CardInfo from './views/pages/CardInfo'
 import NoMatch from './views/pages/NoMatch'
 import Product from './views/components/Product'
 import Layout from './views/components/Layout'
 import Cart from './views/pages/Cart'
+import AddItem from './views/admin/create/AddItem'
 
 function App() {
   return (
@@ -24,10 +24,10 @@ function App() {
           <Route path=":productId" element={<CardInfo />} />
         </Route>
 
-        <Route path="/cart" element={<Cart />} />
+        <Route path="cart" element={<Cart />} />
 
         {/* // TODO: Hide these behind a login wall */}
-        <Route path='create' element={<CreateShopItem />} />
+        <Route path='new' element={<AddItem/>} />
 
       </Route>
     </Routes>

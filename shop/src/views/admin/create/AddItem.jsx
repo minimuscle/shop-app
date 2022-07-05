@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import {
   Button,
   CssBaseline,
@@ -12,6 +12,8 @@ import { Formik, Form } from 'formik'
 import CreatableSelect from 'react-select/creatable'
 
 export default function AddItem() {
+  const [upload, setUpload] = useState('')
+
   function handleChange() {
     console.log('Changed')
   }
@@ -123,6 +125,15 @@ export default function AddItem() {
                   <label htmlFor="tags">Tags:</label>
                   <CreatableSelect isMulti options={colourOptions} />
                 </Grid>
+                <Button variant="contained" component="label">
+                  Upload File
+                  <input
+                    type="file"
+                    onChange={(e) => setUpload(e.target.files[0].name)}
+                    hidden
+                  />
+                </Button>
+                <Typography variant="body">{upload}</Typography>
                 <Grid item xs={12}>
                   <Button
                     type="submit"

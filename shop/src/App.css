@@ -106,3 +106,20 @@
 .cardDesc .buttons button {
   margin: 20px 10px;
 }
+
+.paper {
+  font-family: sans-serif;
+  text-align: center;
+  display: "flex";
+  flex-direction: "column";
+  align-items: "center";
+  margin-top: 50px;
+}
+
+.form {
+  margin: 30px 0;
+}
+
+.submitBtn {
+  margin: 30px;
+}

@@ -12,6 +12,7 @@ import {
 import { makeStyles } from '@mui/styles'
 import { Formik, Form } from 'formik'
 import CreatableSelect from 'react-select/creatable'
+import Select from 'react-select'
 import Cropper from 'react-cropper'
 import 'cropperjs/dist/cropper.css'
 
@@ -182,10 +183,18 @@ export default function AddItem() {
                   />
                 </Grid>
                 <Grid item xs={12}>
+                  <label htmlFor="parent">Parent:</label>
+                  <Select options={colourOptions} />
+                </Grid>
+                <Grid item xs={12}>
+                  <label htmlFor="category">Category:</label>
+                  <CreatableSelect options={colourOptions} />
+                </Grid>
+                <Grid item xs={12}>
                   <label htmlFor="tags">Tags:</label>
                   <CreatableSelect isMulti options={colourOptions} />
                 </Grid>
-                <Grid item xs={2}>
+                <Grid item xs={12} sm={4}>
                   <Button variant="contained" component="label">
                     Upload File
                     <input
@@ -197,7 +206,7 @@ export default function AddItem() {
                     />
                   </Button>
                 </Grid>
-                <Grid item xs={10}>
+                <Grid item xs={12} sm={8}>
                   <img
                     src={croppedImg}
                     style={{ maxHeight: 400, maxWidth: 300 }}

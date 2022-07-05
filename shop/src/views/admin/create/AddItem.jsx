@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useRef } from 'react'
 import {
   Button,
   CssBaseline,
@@ -6,16 +6,46 @@ import {
   Grid,
   Typography,
   Container,
+  Modal,
+  Box,
 } from '@mui/material'
 import { makeStyles } from '@mui/styles'
 import { Formik, Form } from 'formik'
 import CreatableSelect from 'react-select/creatable'
+import Cropper from 'react-cropper'
+import 'cropperjs/dist/cropper.css'
 
 export default function AddItem() {
   const [upload, setUpload] = useState('')
+  const [open, setOpen] = useState(false)
+
+  const cropperRef = useRef(null)
+  const [croppedImg, setCroppedImg] = useState('')
+  const onCrop = () => {
+    const imageElement = cropperRef?.current
+    const cropper = imageElement?.cropper
+    setCroppedImg(cropper.getCroppedCanvas().toDataURL())
+    handleClose()
+  }
 
   function handleChange() {
     console.log('Changed')
+  }
+
+  const handleOpen = () => {
+    setOpen(true)
+    console.log('open')
+  }
+  const handleClose = () => {
+    setOpen(false)
+    console.log('close')
+  }
+
+  function cropImage(image) {
+    //TODO: This needs to bring up the crop modal
+    setUpload(URL.createObjectURL(image))
+    console.log(URL.createObjectURL(image))
+    handleOpen()
   }
 
   //TODO: Replace this with a table in the database of all the tags ever made
@@ -35,6 +65,36 @@ export default function AddItem() {
   return (
     <Container component="main" className="content">
       <CssBaseline />
+
+      <Modal open={open} onClose={handleClose}>
+        <Box className="modal">
+          <Cropper
+            className="cropper"
+            src={upload}
+            style={{ maxHeight: 600, maxWidth: 800 }}
+            guides={false}
+            ref={cropperRef}
+            viewMode={1}
+            minCropBoxHeight={10}
+            minCropBoxWidth={10}
+            responsive={true}
+            autoCropArea={1}
+            aspectRatio={4 / 3}
+            checkOrientation={false}
+          />
+          <Button
+            fullWidth
+            variant="contained"
+            color="primary"
+            className="cropper"
+            onClick={() => onCrop()}
+          >
+            Crop
+          </Button>
+          <img src={croppedImg} style={{ maxHeight: 400, maxWidth: 300 }} />
+        </Box>
+      </Modal>
+
       <div className="paper">
         <Typography component="h1" variant="h5">
           Add New Product
@@ -125,15 +185,25 @@ export default function AddItem() {
                   <label htmlFor="tags">Tags:</label>
                   <CreatableSelect isMulti options={colourOptions} />
                 </Grid>
-                <Button variant="contained" component="label">
-                  Upload File
-                  <input
-                    type="file"
-                    onChange={(e) => setUpload(e.target.files[0].name)}
-                    hidden
+                <Grid item xs={2}>
+                  <Button variant="contained" component="label">
+                    Upload File
+                    <input
+                      type="file"
+                      onChange={(e) => {
+                        cropImage(e.target.files[0])
+                      }}
+                      hidden
+                    />
+                  </Button>
+                </Grid>
+                <Grid item xs={10}>
+                  <img
+                    src={croppedImg}
+                    style={{ maxHeight: 400, maxWidth: 300 }}
                   />
-                </Button>
-                <Typography variant="body">{upload}</Typography>
+                </Grid>
+
                 <Grid item xs={12}>
                   <Button
                     type="submit"
@@ -141,6 +211,7 @@ export default function AddItem() {
                     variant="contained"
                     color="primary"
                     className="submitBtn"
+                    onClick={() => handleOpen()}
                   >
                     Add Item
                   </Button>

@@ -8,10 +8,13 @@ import {
   Container,
   Modal,
   Box,
+  InputAdornment,
+  OutlinedInput,
+  InputLabel,
+  FormControl,
 } from '@mui/material'
 import { Formik, Form } from 'formik'
-import CreatableSelect, { useCreatable } from 'react-select/creatable'
-import Select from 'react-select'
+import CreatableSelect from 'react-select/creatable'
 import axios from 'axios'
 import Cropper from 'react-cropper'
 import 'cropperjs/dist/cropper.css'
@@ -80,7 +83,7 @@ export default function AddItem() {
   return (
     <Container component="main" className="content">
       <CssBaseline />
-
+      {/** //TODO: Make this a component */}
       <Modal open={open} onClose={handleClose}>
         <Box className="modal">
           <Cropper
@@ -129,116 +132,97 @@ export default function AddItem() {
               <Grid container spacing={2}>
                 <Grid item xs={12} sm={6}>
                   <TextField
-                    error={errors.firstName && touched.firstName}
-                    autoComplete="fname"
-                    name="firstName"
+                    error={errors.name && touched.name}
+                    autoComplete="name"
+                    name="name"
                     variant="outlined"
                     fullWidth
                     onChange={handleChange}
-                    id="firstName"
-                    label="First Name"
+                    id="name"
+                    label="Name"
                     autoFocus
                     helperText={
-                      errors.firstName && touched.firstName
-                        ? errors.firstName
-                        : null
+                      errors.name && touched.name ? errors.name : null
                     }
                   />
                 </Grid>
                 <Grid item xs={12} sm={6}>
-                  <TextField
-                    error={errors.lastName && touched.lastName}
-                    variant="outlined"
-                    fullWidth
-                    onChange={handleChange}
-                    id="lastName"
-                    label="Last Name"
-                    name="lastName"
-                    autoComplete="lname"
-                    helperText={
-                      errors.lastName && touched.lastName
-                        ? errors.lastName
-                        : null
-                    }
-                  />
-                </Grid>
-                <Grid item xs={12}>
-                  <TextField
-                    error={errors.email && touched.email}
-                    variant="outlined"
-                    fullWidth
-                    onChange={handleChange}
-                    id="email"
-                    label="Email Address"
-                    name="email"
-                    autoComplete="email"
-                    helperText={
-                      errors.email && touched.email ? errors.email : null
-                    }
-                  />
-                </Grid>
-                <Grid item xs={12}>
-                  <TextField
-                    error={errors.password && touched.password}
-                    variant="outlined"
-                    fullWidth
-                    onChange={handleChange}
-                    name="password"
-                    label="Password"
-                    type="password"
-                    id="password"
-                    autoComplete="current-password"
-                    helperText={
-                      errors.password && touched.password
-                        ? errors.password
-                        : null
-                    }
-                  />
-                </Grid>
-                <Grid item xs={12}>
-                  <label htmlFor="category">Category:</label>
-                  <CreatableSelect
-                    onChange={handleCategory}
-                    options={category.map((tag) => {
-                      return {
-                        value: tag.tag,
-                        label: tag.tag,
+                  <FormControl fullWidth>
+                    <InputLabel htmlFor="outlined-adornment-amount">
+                      Amount
+                    </InputLabel>
+                    <OutlinedInput
+                      id="outlined-adornment-amount"
+                      onChange={handleChange('amount')}
+                      startAdornment={
+                        <InputAdornment position="start">$</InputAdornment>
                       }
-                    })}
-                  />
-                </Grid>
-                <Grid item xs={12}>
-                  <label htmlFor="tags">Tags:</label>
-                  <CreatableSelect
-                    isMulti
-                    onChange={handleTags}
-                    options={tags.map((tag) => {
-                      return {
-                        value: tag.tag,
-                        label: tag.tag,
-                      }
-                    })}
-                  />
-                </Grid>
-                <Grid item xs={12} sm={4}>
-                  <Button variant="contained" component="label">
-                    Upload File
-                    <input
-                      type="file"
-                      onChange={(e) => {
-                        cropImage(e.target.files[0])
-                      }}
-                      hidden
+                      label="Amount"
                     />
-                  </Button>
+                  </FormControl>
                 </Grid>
-                <Grid item xs={12} sm={8}>
-                  <img
-                    src={croppedImg}
-                    style={{ maxHeight: 400, maxWidth: 300 }}
+                <Grid item xs={12}>
+                  <TextField
+                    fullWidth
+                    id="outlined-multiline-static"
+                    label="Description"
+                    multiline
+                    rows={4}
+                    placeholder="Describe your product"
                   />
                 </Grid>
-
+                <Grid item xs={12} sm={6} container spacing={2}>
+                  <Grid item xs={12}>
+                    <label htmlFor="category">Category:</label>
+                    <CreatableSelect
+                      onChange={handleCategory}
+                      options={category.map((tag) => {
+                        return {
+                          value: tag.tag,
+                          label: tag.tag,
+                        }
+                      })}
+                    />
+                  </Grid>
+                  <Grid item xs={12}>
+                    <label htmlFor="tags">Tags:</label>
+                    <CreatableSelect
+                      isMulti
+                      onChange={handleTags}
+                      options={tags.map((tag) => {
+                        return {
+                          value: tag.tag,
+                          label: tag.tag,
+                        }
+                      })}
+                    />
+                  </Grid>
+                </Grid>
+                <Grid item xs={12} sm={6} container spacing={2}>
+                  <Grid item xs={12} sm={5}>
+                    <Button
+                      variant="contained"
+                      component="label"
+                      fullWidth
+                      className="uploadBtn"
+                    >
+                      Upload File
+                      <input
+                        type="file"
+                        onChange={(e) => {
+                          cropImage(e.target.files[0])
+                        }}
+                        hidden
+                      />
+                    </Button>
+                  </Grid>
+                  <Grid item xs={12} sm={6}>
+                    <img
+                      src={croppedImg}
+                      style={{ maxHeight: 400, maxWidth: 300 }}
+                    />
+                  </Grid>
+                </Grid>
                 <Grid item xs={12}>
                   <Button
                     type="submit"

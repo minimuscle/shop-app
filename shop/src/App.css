@@ -139,3 +139,7 @@
 .cropper {
   padding-bottom: 30px;
 }
+
+.uploadBtn {
+  margin-top: 25px !important;
+}

@@ -20,6 +20,8 @@ import Cropper from 'react-cropper'
 import 'cropperjs/dist/cropper.css'
 
 export default function AddItem() {
+  const [selectedCategory, setSelectedCategory] = useState('')
+  const [selectedTags, setSelectedTags] = useState('')
   const [upload, setUpload] = useState('')
   const [tags, setTags] = useState([])
   const [category, setCategory] = useState([])
@@ -55,6 +57,10 @@ export default function AddItem() {
     console.log(`new: ${newValue[newValue.length - 1].label}`)
     console.log(`action: ${actionMeta.action}`)
     console.groupEnd()
+
+    let list = []
+    newValue.map((tag) => (list = [...list, tag.value]))
+    setSelectedTags(list)
   }
 
   const handleCategory = (newValue, actionMeta) => {
@@ -63,6 +69,8 @@ export default function AddItem() {
     console.log(`new: ${newValue.label}`)
     console.log(`action: ${actionMeta.action}`)
     console.groupEnd()
+
+    setSelectedCategory(newValue.value)
   }
 
   const handleOpen = () => {
@@ -80,10 +88,32 @@ export default function AddItem() {
     handleOpen()
   }
 
+  async function addItem(values) {
+    console.log('Values: ' + selectedCategory)
+    const response = await axios({
+      method: 'POST',
+      url: 'http://localhost:8080/add/product',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      data: {
+        name: values.name,
+        description: values.description,
+        price: values.price,
+        category: selectedCategory,
+        image: croppedImg,
+        tags: selectedTags,
+      },
+    })
+    console.log(response)
+  }
+
   return (
     <Container component="main" className="content">
       <CssBaseline />
-      {/** //TODO: Make this a component */}
+      {/** //TODO: Make this a component
+       * //TODO: Allow user to edit cropped file, and reupload the same file again
+       */}
       <Modal open={open} onClose={handleClose}>
         <Box className="modal">
           <Cropper
@@ -118,13 +148,16 @@ export default function AddItem() {
         </Typography>
         <Formik
           initialValues={{
-            firstName: '',
-            lastName: '',
-            email: '',
-            password: '',
+            name: '',
+            price: '',
+            description: '',
+            categories: [],
           }}
           onSubmit={(values) => {
+            alert(JSON.stringify(values))
             console.log(values)
+
+            addItem(values)
           }}
         >
           {({ errors, handleChange, touched }) => (
@@ -148,12 +181,11 @@ export default function AddItem() {
                 </Grid>
                 <Grid item xs={12} sm={6}>
                   <FormControl fullWidth>
-                    <InputLabel htmlFor="outlined-adornment-amount">
-                      Amount
-                    </InputLabel>
+                    <InputLabel htmlFor="price">Amount</InputLabel>
                     <OutlinedInput
-                      id="outlined-adornment-amount"
-                      onChange={handleChange('amount')}
+                      name="price"
+                      id="price"
+                      onChange={handleChange}
                       startAdornment={
                         <InputAdornment position="start">$</InputAdornment>
                       }
@@ -163,8 +195,11 @@ export default function AddItem() {
                 </Grid>
                 <Grid item xs={12}>
                   <TextField
+                    autoComplete="description"
                     fullWidth
-                    id="outlined-multiline-static"
+                    onChange={handleChange}
+                    name="description"
+                    id="description"
                     label="Description"
                     multiline
                     rows={4}
@@ -175,6 +210,8 @@ export default function AddItem() {
                   <Grid item xs={12}>
                     <label htmlFor="category">Category:</label>
                     <CreatableSelect
+                      name="categories"
+                      id="categories"
                       onChange={handleCategory}
                       options={category.map((tag) => {
                         return {
@@ -230,7 +267,6 @@ export default function AddItem() {
                     variant="contained"
                     color="primary"
                     className="submitBtn"
-                    onClick={() => handleOpen()}
                   >
                     Add Item
                   </Button>

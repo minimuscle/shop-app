@@ -57,7 +57,7 @@ export default function AddItem() {
   const handleCategory = (newValue, actionMeta) => {
     console.group('Value Changed')
     console.log(newValue)
-    console.log(`new: ${newValue[newValue.length - 1].label}`)
+    console.log(`new: ${newValue.label}`)
     console.log(`action: ${actionMeta.action}`)
     console.groupEnd()
   }

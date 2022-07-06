@@ -19,6 +19,7 @@ import 'cropperjs/dist/cropper.css'
 export default function AddItem() {
   const [upload, setUpload] = useState('')
   const [tags, setTags] = useState([])
+  const [category, setCategory] = useState([])
   const [open, setOpen] = useState(false)
   const cropperRef = useRef(null)
   const [croppedImg, setCroppedImg] = useState('')
@@ -33,25 +34,10 @@ export default function AddItem() {
         },
       })
       setTags(response.data)
-      console.log(tags)
-      console.log(colourOptions)
+      setCategory(response.data)
     }
     getTags()
   }, [])
-
-  useEffect(() => {
-    console.log('LOADING TAGS')
-    let list = []
-    tags.map((tag) => {
-      list = [...list, { value: tag.tag, label: tag.tag }]
-    })
-    tagList = list
-    console.log('LOADED')
-    console.log(list)
-    console.log(tagList)
-  }, [tags])
-
-  let tagList = []
 
   const onCrop = () => {
     const imageElement = cropperRef?.current
@@ -61,6 +47,14 @@ export default function AddItem() {
   }
 
   const handleTags = (newValue, actionMeta) => {
+    console.group('Value Changed')
+    console.log(newValue)
+    console.log(`new: ${newValue[newValue.length - 1].label}`)
+    console.log(`action: ${actionMeta.action}`)
+    console.groupEnd()
+  }
+
+  const handleCategory = (newValue, actionMeta) => {
     console.group('Value Changed')
     console.log(newValue)
     console.log(`new: ${newValue[newValue.length - 1].label}`)
@@ -78,25 +72,10 @@ export default function AddItem() {
   }
 
   function cropImage(image) {
-    //TODO: This needs to bring up the crop modal
     setUpload(URL.createObjectURL(image))
     console.log(URL.createObjectURL(image))
     handleOpen()
   }
-
-  //TODO: Replace this with a table in the database of all the tags ever made
-  const colourOptions = [
-    { value: 'ocean', label: 'Ocean', color: '#00B8D9', isFixed: true },
-    { value: 'blue', label: 'Blue', color: '#0052CC', isDisabled: true },
-    { value: 'purple', label: 'Purple', color: '#5243AA' },
-    { value: 'red', label: 'Red', color: '#FF5630', isFixed: true },
-    { value: 'orange', label: 'Orange', color: '#FF8B00' },
-    { value: 'yellow', label: 'Yellow', color: '#FFC400' },
-    { value: 'green', label: 'Green', color: '#36B37E' },
-    { value: 'forest', label: 'Forest', color: '#00875A' },
-    { value: 'slate', label: 'Slate', color: '#253858' },
-    { value: 'silver', label: 'Silver', color: '#666666' },
-  ]
 
   return (
     <Container component="main" className="content">
@@ -127,7 +106,6 @@ export default function AddItem() {
           >
             Crop
           </Button>
-          <img src={croppedImg} style={{ maxHeight: 400, maxWidth: 300 }} />
         </Box>
       </Modal>
 
@@ -218,12 +196,16 @@ export default function AddItem() {
                   />
                 </Grid>
                 <Grid item xs={12}>
-                  <label htmlFor="parent">Parent:</label>
-                  <Select options={colourOptions} />
-                </Grid>
-                <Grid item xs={12}>
                   <label htmlFor="category">Category:</label>
-                  <CreatableSelect options={colourOptions} />
+                  <CreatableSelect
+                    onChange={handleCategory}
+                    options={category.map((tag) => {
+                      return {
+                        value: tag.tag,
+                        label: tag.tag,
+                      }
+                    })}
+                  />
                 </Grid>
                 <Grid item xs={12}>
                   <label htmlFor="tags">Tags:</label>

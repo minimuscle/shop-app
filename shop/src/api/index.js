@@ -10,15 +10,20 @@ app.get('/', (req, res) => {
   res.send('Hello World!')
 })
 
+app.get('/tags', (req, res) => {
+  const sql = "SELECT * FROM TAGS"
+  db.all(sql, [], (err, rows) => {
+    if (err) return console.error(err.message)
+    console.log(rows)
+    res.send(rows)
+  })
+})
+
+
 app.get('/products', (req, res) => {
   const sql = "SELECT * FROM PRODUCTS"
   db.all(sql, [], (err, rows) => {
     if (err) return console.error(err.message)
-
-    /*rows.forEach((row) => {
-      console.log(row)
-      res.send(row)
-    })*/
     console.log(rows)
     res.send(rows)
   })

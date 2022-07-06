@@ -1,13 +1,16 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState, useContext } from 'react'
+import { PropTypes } from 'prop-types'
 import { Container, Grid, Typography, Button, Breadcrumbs } from '@mui/material'
 import { useParams } from 'react-router-dom'
 import axios from 'axios'
 import SendIcon from '@mui/icons-material/Send'
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart'
+import { C } from '../context/CartContext'
 
-function CardInfo() {
+function CardInfo(props) {
   const { productId } = useParams()
   const [productInfo, setProductInfo] = useState(['Database Loading'])
+  const { cart, setCart } = useContext(C)
 
   useEffect(() => {
     async function getProducts() {
@@ -20,9 +23,18 @@ function CardInfo() {
       })
       setProductInfo([response.data])
       document.title = response.data.name + ' | Shadowvale Crafts'
+      console.log(productId)
     }
     getProducts()
   }, [productId])
+
+  function addToCart() {
+    setCart([...cart, props])
+  }
+
+  function removeFromCart() {
+    setCart(cart.filter((c) => c.id !== props.id))
+  }
 
   return (
     <Container className="content">
@@ -77,10 +89,18 @@ function CardInfo() {
               <Typography variant="h6">Description:</Typography>
               <Typography variant="body1">{product.description}</Typography>
               <div className="buttons">
-                <Button variant="contained" endIcon={<ShoppingCartIcon />}>
+                <Button
+                  size="small"
+                  endIcon={<ShoppingCartIcon />}
+                  onClick={addToCart}
+                >
                   Add to Cart
                 </Button>
-                <Button variant="contained" endIcon={<SendIcon />}>
+                <Button
+                  variant="contained"
+                  endIcon={<SendIcon />}
+                  onClick={removeFromCart}
+                >
                   Buy Now
                 </Button>
               </div>
@@ -90,6 +110,10 @@ function CardInfo() {
       })}
     </Container>
   )
+}
+
+CardInfo.propTypes = {
+  id: PropTypes.integer,
 }
 
 export default CardInfo

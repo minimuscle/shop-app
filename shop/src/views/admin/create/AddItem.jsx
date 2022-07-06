@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react'
+import React, { useState, useRef, useEffect } from 'react'
 import {
   Button,
   CssBaseline,
@@ -9,19 +9,50 @@ import {
   Modal,
   Box,
 } from '@mui/material'
-import { makeStyles } from '@mui/styles'
 import { Formik, Form } from 'formik'
-import CreatableSelect from 'react-select/creatable'
+import CreatableSelect, { useCreatable } from 'react-select/creatable'
 import Select from 'react-select'
+import axios from 'axios'
 import Cropper from 'react-cropper'
 import 'cropperjs/dist/cropper.css'
 
 export default function AddItem() {
   const [upload, setUpload] = useState('')
+  const [tags, setTags] = useState([])
   const [open, setOpen] = useState(false)
-
   const cropperRef = useRef(null)
   const [croppedImg, setCroppedImg] = useState('')
+
+  useEffect(() => {
+    async function getTags() {
+      const response = await axios({
+        method: 'GET',
+        url: 'http://localhost:8080/tags',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      })
+      setTags(response.data)
+      console.log(tags)
+      console.log(colourOptions)
+    }
+    getTags()
+  }, [])
+
+  useEffect(() => {
+    console.log('LOADING TAGS')
+    let list = []
+    tags.map((tag) => {
+      list = [...list, { value: tag.tag, label: tag.tag }]
+    })
+    tagList = list
+    console.log('LOADED')
+    console.log(list)
+    console.log(tagList)
+  }, [tags])
+
+  let tagList = []
+
   const onCrop = () => {
     const imageElement = cropperRef?.current
     const cropper = imageElement?.cropper
@@ -29,8 +60,8 @@ export default function AddItem() {
     handleClose()
   }
 
-  function handleChange() {
-    console.log('Changed')
+  const handleChange = (newValue, actionMeta) => {
+    console.log({ newValue, actionMeta })
   }
 
   const handleOpen = () => {
@@ -192,7 +223,16 @@ export default function AddItem() {
                 </Grid>
                 <Grid item xs={12}>
                   <label htmlFor="tags">Tags:</label>
-                  <CreatableSelect isMulti options={colourOptions} />
+                  <CreatableSelect
+                    isMulti
+                    onChange={this.handleChange}
+                    options={tags.map((tag) => {
+                      return {
+                        value: tag.tag,
+                        label: tag.tag,
+                      }
+                    })}
+                  />
                 </Grid>
                 <Grid item xs={12} sm={4}>
                   <Button variant="contained" component="label">

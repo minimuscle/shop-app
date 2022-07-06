@@ -1,4 +1,5 @@
 import React, { useEffect, useState, useContext } from 'react'
+import { PropTypes } from 'prop-types'
 import { C } from '../context/CartContext'
 import { Link } from 'react-router-dom'
 import {
@@ -15,7 +16,7 @@ import ShoppingCartIcon from '@mui/icons-material/ShoppingCart'
 import axios from 'axios'
 import '../../App.css'
 
-function ShopCard(p) {
+function ShopCard(props) {
   const [products, setProducts] = useState(['Database Loading'])
   const [title, setTitle] = useState('h5')
   const [price, setPrice] = useState('h4')
@@ -66,11 +67,11 @@ function ShopCard(p) {
   }, [])
 
   function addToCart() {
-    setCart([...cart, p])
+    setCart([...cart, props])
   }
 
   function removeFromCart() {
-    setCart(cart.filter((c) => c.id !== p.id))
+    setCart(cart.filter((c) => c.id !== props.id))
   }
 
   return (
@@ -152,6 +153,10 @@ function ShopCard(p) {
       })}
     </div>
   )
+}
+
+ShopCard.propTypes = {
+  id: PropTypes.integer,
 }
 
 export default ShopCard

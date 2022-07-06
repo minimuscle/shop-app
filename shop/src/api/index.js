@@ -38,6 +38,13 @@ app.get('/product/:id', (req, res) => {
   })
 })
 
+app.post("/add/product", function(req, res) {
+  //FIXME: This doesn't work.
+  let result = req.body
+  console.log(req.body)
+  res.send("Addition - " + result)
+});
+
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}`)
 })

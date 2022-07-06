@@ -60,8 +60,12 @@ export default function AddItem() {
     handleClose()
   }
 
-  const handleChange = (newValue, actionMeta) => {
-    console.log({ newValue, actionMeta })
+  const handleTags = (newValue, actionMeta) => {
+    console.group('Value Changed')
+    console.log(newValue)
+    console.log(`new: ${newValue[newValue.length - 1].label}`)
+    console.log(`action: ${actionMeta.action}`)
+    console.groupEnd()
   }
 
   const handleOpen = () => {
@@ -225,7 +229,7 @@ export default function AddItem() {
                   <label htmlFor="tags">Tags:</label>
                   <CreatableSelect
                     isMulti
-                    onChange={this.handleChange}
+                    onChange={handleTags}
                     options={tags.map((tag) => {
                       return {
                         value: tag.tag,

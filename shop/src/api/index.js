@@ -3,6 +3,9 @@ const express = require('express')
 const app = express()
 const port = 8080
 const cors = require('cors');
+const bodyParser = require('body-parser');
+
+const jsonParser = bodyParser.json()
 
 app.use(cors());
 
@@ -38,11 +41,11 @@ app.get('/product/:id', (req, res) => {
   })
 })
 
-app.post("/add/product", function(req, res) {
+app.post("/add/product", jsonParser, function(req, res) {
   //FIXME: This doesn't work.
-  let result = req.body
-  console.log(req.body)
-  res.send("Addition - " + result)
+  let result = req.body.name
+  console.log(req.body.name)
+  res.send(result)
 });
 
 app.listen(port, () => {

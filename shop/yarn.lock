@@ -4534,7 +4534,7 @@ __metadata:
   languageName: node
   linkType: hard
 
-"body-parser@npm:1.20.0":
+"body-parser@npm:1.20.0, body-parser@npm:^1.20.0":
   version: 1.20.0
   resolution: "body-parser@npm:1.20.0"
   dependencies:
@@ -13280,6 +13280,7 @@ __metadata:
     "@testing-library/react": "npm:^13.0.0"
     "@testing-library/user-event": "npm:^13.2.1"
     axios: "npm:^0.27.2"
+    body-parser: "npm:^1.20.0"
     cors: "npm:^2.8.5"
     eslint: "npm:^8.19.0"
     eslint-plugin-react: "npm:^7.30.1"

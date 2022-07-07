@@ -96,7 +96,7 @@ export default function AddItem() {
       headers: {
         'Content-Type': 'application/json',
       },
-      body: {
+      data: {
         name: values.name,
         description: values.description,
         price: values.price,

@@ -122,7 +122,7 @@ function ShopCard(props) {
                 image={
                   product.image == null
                     ? 'https://via.placeholder.com/400x300?text=400x300+No+Image'
-                    : `data:image/jpeg;base64,${product.image}`
+                    : product.image
                 }
                 alt="Placeholder"
               />

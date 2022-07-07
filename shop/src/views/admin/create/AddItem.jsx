@@ -154,9 +154,7 @@ export default function AddItem() {
             categories: [],
           }}
           onSubmit={(values) => {
-            alert(JSON.stringify(values))
             console.log(values)
-
             addItem(values)
           }}
         >

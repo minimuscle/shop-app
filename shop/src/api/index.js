@@ -43,10 +43,15 @@ app.get('/product/:id', (req, res) => {
 
 app.post("/add/product", jsonParser, function(req, res) {
   //FIXME: This doesn't work.
-  let result = req.body.name
-  console.log(req.body.name)
-  res.send(result)
-});
+  let result = req.body
+  console.log(req.body)
+  const sql = `INSERT INTO PRODUCTS (name, description, price, category, image, tags)\
+              VALUES ("${req.body.name}", "${req.body.description}", ${req.body.price}, "${req.body.category}", "${req.body.image}", "${req.body.tags}");`
+  db.run(sql, [], (err, row) => {
+    if (err) return console.error(err.message)
+    res.send(row)
+  })
+})
 
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}`)

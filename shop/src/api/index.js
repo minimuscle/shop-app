@@ -60,7 +60,6 @@ app.post("/add/product", jsonParser, function(req, res) {
 
 //TODO: Only add if it doesnt exist first
 app.post("/add/category", jsonParser, function(req, res) {
-  console.log(req.body)
   const sql = `INSERT INTO CATEGORIES (category)\
               VALUES ("${req.body.category}");`
   db.run(sql, [], (err, row) => {
@@ -70,13 +69,26 @@ app.post("/add/category", jsonParser, function(req, res) {
 })
 
 app.post("/add/tag", jsonParser, function(req, res) {
-  console.log(req.body)
-  const sql = `INSERT INTO TAGS (tag)\
+  console.log(req.body.tags)
+
+  const sql = `SELECT * FROM TAGS WHERE tag = ? LIMIT 1"`
+  db.get(sql, req.body.tags, function(err, row){
+    if(row){
+      res.send("Tag already exists");
+    } else {
+      //var stmt = db.prepare("INSERT INTO user VALUES (?,?)");
+      //stmt.run(req.body.username, req.body.password);
+      res.send("Tag good exists");
+      res.end("OK");
+    }
+  })
+  /*const sql = `INSERT INTO TAGS (tag)\
               VALUES ("${req.body.tags}");`
   db.run(sql, [], (err, row) => {
     if (err) return console.error(err.message)
+    console.log("Answer: " + row)
     res.send(row)
-  })
+  })*/
 })
 
 app.listen(port, () => {

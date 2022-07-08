@@ -39,9 +39,19 @@ export default function AddItem() {
         },
       })
       setTags(response.data)
+    }
+    async function getCategories() {
+      const response = await axios({
+        method: 'GET',
+        url: 'http://localhost:8080/categories',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      })
       setCategory(response.data)
     }
     getTags()
+    getCategories()
   }, [])
 
   const onCrop = () => {
@@ -211,6 +221,12 @@ export default function AddItem() {
                       name="categories"
                       id="categories"
                       onChange={handleCategory}
+                      formatCreateLabel={(inputValue) =>
+                        `Create category: ${inputValue}`
+                      }
+                      noOptionsMessage={() =>
+                        'No Categories found! Start typing to create a new one'
+                      }
                       options={category.map((tag) => {
                         return {
                           value: tag.tag,
@@ -224,6 +240,12 @@ export default function AddItem() {
                     <CreatableSelect
                       isMulti
                       onChange={handleTags}
+                      formatCreateLabel={(inputValue) =>
+                        `Create tag: ${inputValue}`
+                      }
+                      noOptionsMessage={() =>
+                        'No Tags found! Start typing to create a new one'
+                      }
                       options={tags.map((tag) => {
                         return {
                           value: tag.tag,

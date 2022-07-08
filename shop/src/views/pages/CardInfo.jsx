@@ -82,7 +82,7 @@ function CardInfo(props) {
               {product.image == null ? (
                 <img src="https://via.placeholder.com/1000x600?text=1000x600+No+Image" />
               ) : (
-                <img src={`data:image/jpeg;base64,${product.image}`} />
+                <img src={product.image} />
               )}
             </Grid>
             <Grid item xs={6} className="cardDesc">

@@ -22,6 +22,15 @@ app.get('/tags', (req, res) => {
   })
 })
 
+app.get('/categories', (req, res) => {
+  const sql = "SELECT * FROM CATEGORIES"
+  db.all(sql, [], (err, rows) => {
+    if (err) return console.error(err.message)
+    console.log(rows)
+    res.send(rows)
+  })
+})
+
 
 app.get('/products', (req, res) => {
   const sql = "SELECT * FROM PRODUCTS"

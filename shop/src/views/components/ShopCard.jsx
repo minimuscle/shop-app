@@ -24,8 +24,6 @@ function ShopCard(props) {
   // TODO: This will eventually be set by the user
   const cardNum = 3
 
-  // FIXME: Images need to be cropped to be 4:3. use cropper.js to do this.
-
   useEffect(() => {
     async function getProducts() {
       const response = await axios({
@@ -66,8 +64,9 @@ function ShopCard(props) {
     getCardNum()
   }, [])
 
-  function addToCart() {
-    setCart([...cart, props])
+  function addToCart(product) {
+    console.log(product)
+    setCart([...cart, product])
   }
 
   function removeFromCart() {
@@ -120,7 +119,7 @@ function ShopCard(props) {
                 component="img"
                 sx={{ maxWidth: 400, maxHeight: 300 }}
                 image={
-                  product.image == null
+                  product.image == null || product.image == 'null'
                     ? 'https://via.placeholder.com/400x300?text=400x300+No+Image'
                     : product.image
                 }
@@ -136,7 +135,7 @@ function ShopCard(props) {
               <Button
                 size="small"
                 endIcon={<ShoppingCartIcon />}
-                onClick={addToCart}
+                onClick={() => addToCart(product.product_id)}
               >
                 Add to Cart
               </Button>

@@ -26,7 +26,7 @@ const Cart = () => {
       <div className="productContainer">
         {cart.map((prod) => (
           <Card key={prod.id} className="card">
-            <CardContent>Hi</CardContent>
+            <CardContent>{prod.name}</CardContent>
           </Card>
         ))}
       </div>

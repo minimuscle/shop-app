@@ -27,7 +27,7 @@ export default function AddItem() {
   const [category, setCategory] = useState([])
   const [open, setOpen] = useState(false)
   const cropperRef = useRef(null)
-  const [croppedImg, setCroppedImg] = useState('')
+  const [croppedImg, setCroppedImg] = useState(null)
 
   useEffect(() => {
     async function getTags() {
@@ -116,6 +116,30 @@ export default function AddItem() {
       },
     })
     console.log(response)
+    axios({
+      method: 'POST',
+      url: 'http://localhost:8080/add/category',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      data: {
+        category: selectedCategory,
+      },
+    })
+
+    //TODO: Separate the tags in the list first
+
+    axios({
+      method: 'POST',
+      url: 'http://localhost:8080/add/tag',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      data: {
+        tags: selectedTags,
+      },
+    })
+    //This will add the new tags and categories
   }
 
   return (
@@ -227,10 +251,10 @@ export default function AddItem() {
                       noOptionsMessage={() =>
                         'No Categories found! Start typing to create a new one'
                       }
-                      options={category.map((tag) => {
+                      options={category.map((category) => {
                         return {
-                          value: tag.tag,
-                          label: tag.tag,
+                          value: category.category,
+                          label: category.category,
                         }
                       })}
                     />

@@ -7,7 +7,7 @@ const bodyParser = require('body-parser');
 
 const jsonParser = bodyParser.json()
 
-app.use(cors());
+app.use(cors())
 
 app.get('/', (req, res) => {
   res.send('Hello World!')
@@ -36,7 +36,6 @@ app.get('/products', (req, res) => {
   const sql = "SELECT * FROM PRODUCTS"
   db.all(sql, [], (err, rows) => {
     if (err) return console.error(err.message)
-    console.log(rows)
     res.send(rows)
   })
 })
@@ -51,11 +50,29 @@ app.get('/product/:id', (req, res) => {
 })
 
 app.post("/add/product", jsonParser, function(req, res) {
-  //FIXME: This doesn't work.
-  let result = req.body
-  console.log(req.body)
   const sql = `INSERT INTO PRODUCTS (name, description, price, category, image, tags)\
               VALUES ("${req.body.name}", "${req.body.description}", ${req.body.price}, "${req.body.category}", "${req.body.image}", "${req.body.tags}");`
+  db.run(sql, [], (err, row) => {
+    if (err) return console.error(err.message)
+    res.send(row)
+  })
+})
+
+//TODO: Only add if it doesnt exist first
+app.post("/add/category", jsonParser, function(req, res) {
+  console.log(req.body)
+  const sql = `INSERT INTO CATEGORIES (category)\
+              VALUES ("${req.body.category}");`
+  db.run(sql, [], (err, row) => {
+    if (err) return console.error(err.message)
+    res.send(row)
+  })
+})
+
+app.post("/add/tag", jsonParser, function(req, res) {
+  console.log(req.body)
+  const sql = `INSERT INTO TAGS (tag)\
+              VALUES ("${req.body.tags}");`
   db.run(sql, [], (err, row) => {
     if (err) return console.error(err.message)
     res.send(row)

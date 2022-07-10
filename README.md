@@ -1,6 +1,6 @@
 # Shop Application
 
-![VERSION: 0.0.2 (shields.io)](https://img.shields.io/badge/Version-0.0.2_Alpha-blue?style=for-the-badge)
+![VERSION: 0.0.3 (shields.io)](https://img.shields.io/badge/Version-0.0.3_Alpha-blue?style=for-the-badge)
 
 <a href="https://www.buymeacoffee.com/dumblydorr"><img src="https://img.buymeacoffee.com/button-api/?text=Buy me a coffee&emoji=&slug=dumblydorr&button_colour=FFDD00&font_colour=000000&font_family=Poppins&outline_colour=000000&coffee_colour=ffffff" /></a>
 
@@ -15,14 +15,15 @@ I wanted something that was easy to use for people, and free to do. At the end o
 The current roadmap for development is outline below, these are all the features I want to add to this tool, and are not in any particular order:
 
 1. ~~Create the Shop~~
-2. Create the ability to add items though app
-3. Create an admin dashboard
-4. Create the ability to edit items / delete / app through dashboard
-5. Create statistics for purchases
-6. Add paypal / stripe / other support
-7. Add support for payment via google pay
-8. Notification system when stock is low
-9. Add support for login-only store items
+2. ~~Create the ability to add items though app~~
+3. Create the cart
+4. Create an admin dashboard
+5. Create the ability to edit items / delete / app through dashboard
+6. Create statistics for purchases
+7. Add paypal / stripe / other support
+8. Add support for payment via google pay
+9. Notification system when stock is low
+10. Add support for login-only store items
 
 There is still much to do, so please bear with me while I develop this. Feel free to add any other ideas in the `suggestion` tags. I'll read them all.
 

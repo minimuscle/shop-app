@@ -27,10 +27,11 @@ function App() {
         <Route path="cart" element={<Cart />} />
 
         {/* // TODO: Hide these behind a login wall */}
-        <Route path='new' element={<AddItem/>} />
+        <Route path='new' element={<AddItem />} />
 
       </Route>
     </Routes>
+
 
   )
 }

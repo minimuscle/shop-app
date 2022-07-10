@@ -4,16 +4,16 @@ import './index.css'
 import App from './App'
 import reportWebVitals from './reportWebVitals'
 import { BrowserRouter } from 'react-router-dom'
-import Context from './views/context/CartContext'
+import { CartProvider } from './views/context/CartContext'
 
 const root = ReactDOM.createRoot(document.getElementById('root'))
 root.render(
   <React.StrictMode>
-    <Context>
+    <CartProvider>
       <BrowserRouter>
         <App />
       </BrowserRouter>
-    </Context>
+    </CartProvider>
   </React.StrictMode>
 )
 

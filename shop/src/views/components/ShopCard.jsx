@@ -1,6 +1,5 @@
 import React, { useEffect, useState, useContext } from 'react'
 import { PropTypes } from 'prop-types'
-import { C } from '../context/CartContext'
 import { Link } from 'react-router-dom'
 import {
   Card,
@@ -15,14 +14,15 @@ import SendIcon from '@mui/icons-material/Send'
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart'
 import axios from 'axios'
 import '../../App.css'
+import CartContext from '../context/CartContext'
 
 function ShopCard(props) {
   const [products, setProducts] = useState(['Database Loading'])
   const [title, setTitle] = useState('h5')
   const [price, setPrice] = useState('h4')
-  const { cart, setCart } = useContext(C)
   // TODO: This will eventually be set by the user
   const cardNum = 3
+  const { cart, addItem } = useContext(CartContext)
 
   useEffect(() => {
     async function getProducts() {
@@ -66,11 +66,12 @@ function ShopCard(props) {
 
   function addToCart(product) {
     console.log(product)
-    setCart([...cart, product])
+    addItem(product)
+    //setCart([...cart, product])
   }
 
   function removeFromCart() {
-    setCart(cart.filter((c) => c.id !== props.id))
+    //setCart(cart.filter((c) => c.id !== props.id))
   }
 
   return (
@@ -135,7 +136,7 @@ function ShopCard(props) {
               <Button
                 size="small"
                 endIcon={<ShoppingCartIcon />}
-                onClick={() => addToCart(product.product_id)}
+                onClick={() => addToCart(product)}
               >
                 Add to Cart
               </Button>
@@ -155,7 +156,7 @@ function ShopCard(props) {
 }
 
 ShopCard.propTypes = {
-  id: PropTypes.integer,
+  id: PropTypes.number,
 }
 
 export default ShopCard

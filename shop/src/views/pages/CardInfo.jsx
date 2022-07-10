@@ -5,12 +5,10 @@ import { useParams } from 'react-router-dom'
 import axios from 'axios'
 import SendIcon from '@mui/icons-material/Send'
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart'
-import { C } from '../context/CartContext'
 
 function CardInfo(props) {
   const { productId } = useParams()
   const [productInfo, setProductInfo] = useState(['Database Loading'])
-  const { cart, setCart } = useContext(C)
 
   useEffect(() => {
     async function getProducts() {
@@ -29,11 +27,11 @@ function CardInfo(props) {
   }, [productId])
 
   function addToCart() {
-    setCart([...cart, props])
+    //setCart([...cart, props])
   }
 
   function removeFromCart() {
-    setCart(cart.filter((c) => c.id !== props.id))
+    //setCart(cart.filter((c) => c.id !== props.id))
   }
 
   return (
@@ -114,7 +112,7 @@ function CardInfo(props) {
 }
 
 CardInfo.propTypes = {
-  id: PropTypes.integer,
+  id: PropTypes.number,
 }
 
 export default CardInfo

@@ -1,5 +1,5 @@
 /* eslint-disable react/prop-types */
-import React, { useContext } from 'react'
+import React, { useContext, useState } from 'react'
 import {
   Container,
   Drawer,
@@ -10,11 +10,11 @@ import {
 } from '@mui/material'
 import MenuIcon from '@mui/icons-material/Menu'
 import { Link } from 'react-router-dom'
-import { C } from '../context/CartContext'
+import CartContext from '../context/CartContext'
 
 function Header() {
-  const { cart } = useContext(C)
-  const [mobileOpen, setMobileOpen] = React.useState(false)
+  const [mobileOpen, setMobileOpen] = useState(false)
+  const { cart } = useContext(CartContext)
 
   const handleDrawerToggle = () => {
     setMobileOpen(!mobileOpen)

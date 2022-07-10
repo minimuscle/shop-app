@@ -1,11 +1,20 @@
 /* eslint-disable react/prop-types */
 import React, { createContext, useState } from 'react'
 
-export const C = createContext()
+const CartContext = createContext()
 
-const Context = ({ children }) => {
+export function CartProvider({ children }) {
   const [cart, setCart] = useState([])
-  return <C.Provider value={{ cart, setCart }}>{children}</C.Provider>
+
+  const addItem = (product) => {
+    setCart((prevState) => [...prevState, product])
+  }
+
+  return (
+    <CartContext.Provider value={{ cart, addItem }}>
+      {children}
+    </CartContext.Provider>
+  )
 }
 
-export default Context
+export default CartContext

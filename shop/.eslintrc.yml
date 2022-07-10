@@ -13,9 +13,7 @@ plugins:
   - react
 rules:
   indent: ['warn', 2, { 'SwitchCase': 1 }]
-  linebreak-style:
-    - warn
-    - unix
+  linebreak-style: 0
   quotes:
     - warn
     - single

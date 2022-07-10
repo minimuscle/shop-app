@@ -64,15 +64,7 @@ function ShopCard(props) {
     getCardNum()
   }, [])
 
-  function addToCart(product) {
-    console.log(product)
-    addItem(product)
-    //setCart([...cart, product])
-  }
-
-  function removeFromCart() {
-    //setCart(cart.filter((c) => c.id !== props.id))
-  }
+  function removeFromCart() {}
 
   return (
     <div>
@@ -136,7 +128,7 @@ function ShopCard(props) {
               <Button
                 size="small"
                 endIcon={<ShoppingCartIcon />}
-                onClick={() => addToCart(product)}
+                onClick={() => addItem(product)}
               >
                 Add to Cart
               </Button>

@@ -17,8 +17,14 @@ export function CartProvider({ children }) {
     setLocalCart((prevState) => [...prevState, product])
   }
 
+  const removeItem = (product) => {
+    console.log(`Removing 1x product with id: ${product.product_id}`)
+    //setCart((prevState) => [...prevState, product])
+    //setLocalCart((prevState) => [...prevState, product])
+  }
+
   return (
-    <CartContext.Provider value={{ cart, addItem }}>
+    <CartContext.Provider value={{ cart, addItem, removeItem }}>
       {children}
     </CartContext.Provider>
   )

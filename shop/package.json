@@ -29,7 +29,7 @@
     "yarn": "^1.22.19"
   },
   "scripts": {
-    "api": "cd src/api/ && nodemon .",
+    "api": "nodemon ./src/api/index.js",
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",

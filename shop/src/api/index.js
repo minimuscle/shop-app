@@ -2,8 +2,8 @@ const sqlite3 = require('sqlite3').verbose()
 const express = require('express')
 const app = express()
 const port = 8080
-const cors = require('cors');
-const bodyParser = require('body-parser');
+const cors = require('cors')
+const bodyParser = require('body-parser')
 
 const jsonParser = bodyParser.json()
 
@@ -14,7 +14,7 @@ app.get('/', (req, res) => {
 })
 
 app.get('/tags', (req, res) => {
-  const sql = "SELECT * FROM TAGS"
+  const sql = 'SELECT * FROM TAGS'
   db.all(sql, [], (err, rows) => {
     if (err) return console.error(err.message)
     console.log(rows)
@@ -23,7 +23,7 @@ app.get('/tags', (req, res) => {
 })
 
 app.get('/categories', (req, res) => {
-  const sql = "SELECT * FROM CATEGORIES"
+  const sql = 'SELECT * FROM CATEGORIES'
   db.all(sql, [], (err, rows) => {
     if (err) return console.error(err.message)
     console.log(rows)
@@ -31,9 +31,8 @@ app.get('/categories', (req, res) => {
   })
 })
 
-
 app.get('/products', (req, res) => {
-  const sql = "SELECT * FROM PRODUCTS"
+  const sql = 'SELECT * FROM PRODUCTS'
   db.all(sql, [], (err, rows) => {
     if (err) return console.error(err.message)
     res.send(rows)
@@ -49,7 +48,7 @@ app.get('/product/:id', (req, res) => {
   })
 })
 
-app.post("/add/product", jsonParser, function(req, res) {
+app.post('/add/product', jsonParser, function (req, res) {
   const sql = `INSERT INTO PRODUCTS (name, description, price, category, image, tags)\
               VALUES ("${req.body.name}", "${req.body.description}", ${req.body.price}, "${req.body.category}", "${req.body.image}", "${req.body.tags}");`
   db.run(sql, [], (err, row) => {
@@ -59,7 +58,7 @@ app.post("/add/product", jsonParser, function(req, res) {
 })
 
 //TODO: Only add if it doesnt exist first
-app.post("/add/category", jsonParser, function(req, res) {
+app.post('/add/category', jsonParser, function (req, res) {
   const sql = `INSERT INTO CATEGORIES (category)\
               VALUES ("${req.body.category}");`
   db.run(sql, [], (err, row) => {
@@ -68,18 +67,18 @@ app.post("/add/category", jsonParser, function(req, res) {
   })
 })
 
-app.post("/add/tag", jsonParser, function(req, res) {
+app.post('/add/tag', jsonParser, function (req, res) {
   console.log(req.body.tags)
 
-  const sql = `SELECT * FROM TAGS WHERE tag = ? LIMIT 1"`
-  db.get(sql, req.body.tags, function(err, row){
-    if(row){
-      res.send("Tag already exists");
+  const sql = `SELECT * FROM TAGS WHERE tag = ? LIMIT 1`
+  db.get(sql, req.body.tags, function (err, row) {
+    if (row) {
+      res.send('Tag already exists')
     } else {
       //var stmt = db.prepare("INSERT INTO user VALUES (?,?)");
       //stmt.run(req.body.username, req.body.password);
-      res.send("Tag good exists");
-      res.end("OK");
+      res.send('Tag good exists')
+      res.end('OK')
     }
   })
   /*const sql = `INSERT INTO TAGS (tag)\
@@ -95,9 +94,7 @@ app.listen(port, () => {
   console.log(`Example app listening on port ${port}`)
 })
 
-
-
 const db = new sqlite3.Database('shop.db', sqlite3.OPEN_READWRITE, (err) => {
   if (err) console.log(err)
-  else console.log("Connected to shop database")
+  else console.log('Connected to shop database')
 })

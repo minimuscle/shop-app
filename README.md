@@ -1,6 +1,6 @@
 # Shop Application
 
-![VERSION: 0.0.4 (shields.io)](https://img.shields.io/badge/Version-0.0.4_Alpha-blue?style=for-the-badge)
+![VERSION: 0.0.5 (shields.io)](https://img.shields.io/badge/Version-0.0.5_Alpha-blue?style=for-the-badge)
 
 <a href="https://www.buymeacoffee.com/dumblydorr"><img src="https://img.buymeacoffee.com/button-api/?text=Buy me a coffee&emoji=&slug=dumblydorr&button_colour=FFDD00&font_colour=000000&font_family=Poppins&outline_colour=000000&coffee_colour=ffffff" /></a>
 

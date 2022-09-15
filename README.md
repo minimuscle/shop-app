@@ -1,6 +1,6 @@
 # Shop Application
 
-![VERSION: 0.0.5 (shields.io)](https://img.shields.io/badge/Version-0.0.5_Alpha-blue?style=for-the-badge)
+![VERSION: 0.0.6 (shields.io)](https://img.shields.io/badge/Version-0.0.6_Alpha-blue?style=for-the-badge)
 
 <a href="https://www.buymeacoffee.com/dumblydorr"><img src="https://img.buymeacoffee.com/button-api/?text=Buy me a coffee&emoji=&slug=dumblydorr&button_colour=FFDD00&font_colour=000000&font_family=Poppins&outline_colour=000000&coffee_colour=ffffff" /></a>
 
@@ -10,13 +10,19 @@ I wanted something that was easy to use for people, and free to do. At the end o
 
 **_NOTE: This tool is still heavily in development and as such most features are unavailable as of yet. Please create an `issue` and use the `suggestion` tag if you want me to add a feature._**
 
+## Tech Stack
+# 
+* React.js
+  * This is the base for the site, utilizing React and React Router combined to create the shop
+* Chakra UI
+  * This is used to create the CSS in a clear, concise way that fits the theme of what we are working with, which is rounded and smooth, rather than sharp
 # Roadmap
 
 The current roadmap for development is outline below, these are all the features I want to add to this tool, and are not in any particular order:
 
-1. ~~Create the Shop~~
-2. ~~Create the ability to add items though app~~
-3. ~~Create the cart~~
+1. Create the Shop
+2. Create the ability to add items though app
+3. Create the cart
 4. Create Ability to remove items from cart / remove all items
 5. Create an admin dashboard
 6. Create the ability to edit items / delete / app through dashboard

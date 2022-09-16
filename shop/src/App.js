@@ -5,13 +5,15 @@ import Items from './pages/Items'
 import Item from './components/Item'
 import Layout from './context/Layout'
 import NoMatch from './pages/NoMatch'
+import Home from './pages/Home'
 
 export default function App() {
   return (
     <Routes>
       <Route element={<Layout />}>
         <Route path="*" element={<NoMatch />} />
-        <Route index path="shop" element={<Shop />} />
+        <Route index path="/" element={<Home />} />
+        <Route path="shop" element={<Shop />} />
         <Route path="item" element={<Items />}>
           <Route path=":itemId" element={<Item />} />
         </Route>

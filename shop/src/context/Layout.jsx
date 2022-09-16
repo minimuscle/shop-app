@@ -1,15 +1,16 @@
 import React from 'react'
-import { Container } from '@chakra-ui/react'
+import { Box } from '@chakra-ui/react'
 import Header from '../pages/Header'
 import Footer from '../pages/Footer'
 import { Outlet } from 'react-router-dom'
+import '../App.css'
 
 export default function Layout() {
   return (
-    <Container maxW="container.xl">
+    <div>
       <Header />
       <Outlet />
       <Footer />
-    </Container>
+    </div>
   )
 }

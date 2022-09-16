@@ -1,5 +1,6 @@
 import React from 'react'
+import { Container } from '@chakra-ui/react'
 
 export default function Shop() {
-  return <div>Shop</div>
+  return <Container>Shop</Container>
 }

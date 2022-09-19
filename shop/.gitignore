@@ -14,6 +14,8 @@
 /.next/
 /out/
 
+/src/admin
+
 # production
 /build
 

@@ -4,7 +4,7 @@ import { Container } from '@chakra-ui/react'
 
 export default function Items() {
   return (
-    <Container>
+    <Container className="container">
       <h1>Items</h1>
       <Outlet />
     </Container>
